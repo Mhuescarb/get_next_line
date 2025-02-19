@@ -6,11 +6,15 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:15:53 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/02/18 16:24:40 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:11:42 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+/*
+ft_strdup (para "hacer hueco" a la cadena de carcteres que se generará)
+ft_strjoin (para unir el contenido restante en buff a lo que está en left_ch)
+ft_strchr (para buscar '\n')*/
 
 char	*ft_strdup(char *s1)
 {
@@ -64,8 +68,22 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	str[i] = 0;
 	return (str);
 }
-char	*ft_strjoin(char *s1, char*s2)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
 
+	i = 0;
+	if (size == 0)
+		return (ft_strlen(src));
+	while (src [i] != '\0' && i < (size -1))
+	{
+		dst[i] = src [i];
+		i++;
+	}
+	dst [i] = '\0';
+	return (ft_strlen(src));
+}
+char	*ft_strjoin(char *s1, char*s2)
 {
 	char	*result;
 	size_t	len1;
@@ -82,18 +100,3 @@ char	*ft_strjoin(char *s1, char*s2)
 	ft_strlcat(result, s2, len1 + len2 +1);
 	return (result);
 }
-/*size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	i;
-
-	i = 0;
-	if (size == 0)
-		return (ft_strlen(src));
-	while (src [i] != '\0' && i < (size -1))
-	{
-		dst[i] = src [i];
-		i++;
-	}
-	dst [i] = '\0';
-	return (ft_strlen(src));
-}*/

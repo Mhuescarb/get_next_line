@@ -8,9 +8,8 @@ static	char	*fill_line_buff(int fd, char *left_ch, char *buffer)
 
 	b_read = 1;
 	line_break = 0;
-	if (fd < 0 || !buffer || b_read == -1)
+	if (fd < 0 || !buffer)
 	{
-		free(left_ch);
 		return (NULL);
 	}
 	while (b_read > 0 && !line_break)
