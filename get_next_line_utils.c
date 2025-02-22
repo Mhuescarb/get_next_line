@@ -6,24 +6,22 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:15:53 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/02/20 18:03:01 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/02/22 20:59:06 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 /*
-	ft_strlen (necesaria para ft_strdup)
+	ft_strlen (mide la longitud necesaria para ft_strdup)
 	ft_strdup (para "hacer hueco" a la cadena de carcteres que se generará)
 	ft_strchr (para buscar '\n')
-ft_strlcpy (necesaria para ft_strjoin)
-ft_strlcat(necesaria para ft_strjoin)
+	ft_strlcpy (necesaria para ft_strjoin)
+	ft_strlcat(necesaria para ft_strjoin)
 	ft_strjoin (para unir el contenido restante en buff a lo que está en left_ch)
-
 */
-
 size_t ft_strlen(const char *s)
 {
-	int	i;
+	size_t	i;
 	i = 0;
 	
 	while(s[i])
@@ -47,14 +45,13 @@ char	*ft_strdup(const char *s1)
 	}
 	dest[i] = '\0';
 	return (dest);
-	
 }
-const char *ft_strchr(const char *s, int c)
+const char	*ft_strchr(const char *s, int c)
 {
 	unsigned int	i;
 	char			ch;
 	
-	ch = (char) c; // cast para incluir char de más de un byte
+	ch = (char) c; // cast de int a char para incluir chars de más de un byte
 	i = 0;
 
 	while (s[i])
@@ -124,4 +121,27 @@ char	*ft_strjoin(char *s1, char*s2)
 
 return (result);
 
+}
+char	*ft_substr (char *sub, unsigned int start, size_t lenght)
+{
+	ssize_t	i;
+	char	*str;
+	
+	if(!sub)
+		return(NULL);
+	if (start > ft_strlen(sub))
+		return (malloc (1));
+	if (lenght > ft_strlen (sub + start))
+		lenght = ft_strlen (sub + start);
+	str = malloc ((lenght + 1) *sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i < lenght)
+	{
+		str[i] = sub[start + i];
+		i++;
+	}
+	str[i] = 0;
+	return (str);
 }

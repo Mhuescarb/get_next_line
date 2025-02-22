@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-static char	*_fill_line_buffer(int fd, char *left_ch, char *buffer)
+ char	*_fill_line_buffer(int fd, char *left_ch, char *buffer)
 {
 	ssize_t	b_read;
 	char	*temp;

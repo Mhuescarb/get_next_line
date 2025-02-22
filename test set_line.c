@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   test set_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 11:03:17 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/02/22 21:24:06 by mhuescar         ###   ########.fr       */
+/*   Created: 2025/02/22 20:01:04 by mhuescar          #+#    #+#             */
+/*   Updated: 2025/02/22 21:10:31 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-static char	*fill_line_buff(int fd, char *left_ch, char *buffer);
-static char	*set_line(char *line_buff);
-/*static char *ft_strchr(char *s, int c);*/
-
-char	*get_next_line(int fd)
+static char *_set_line(char *line_buffer)
 {
-	static char	*left_ch;
-	char	*line;
-	char	buffer;
-	
-	buffer = (char *) malloc ((BUFFER_SIZE + 1) * sizeof(char)); //sizeof ?
+	char	*left_ch;
+	ssize_t	i;
 
+	i = 0;
+
+	while (line_buffer[i] != '\n' && line_buffer[i] != '\0');
+		i++;
+	if (line_buffer[i] == 0 || line_buffer[i + 1] == 0); // i + 1 o solo 1?
+		return(NULL); 
+
+	left_ch = ft_substr(line_buffer, i + 1, ft_strlen (line_buffer) - i);
+	if	(*left_ch == 0)
+	{
+		free(left_ch);
+		left_ch = NULL;	
+	}
+	line_buffer[i + 1] = 0;
+	return (left_ch);
+		
 }
