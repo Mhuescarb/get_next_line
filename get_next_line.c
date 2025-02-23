@@ -6,7 +6,7 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:03:17 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/02/23 14:20:52 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/02/23 20:31:18 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static char	*fill_line_buffer(int fd, char *left_ch, char *buffer);
 static char	*set_line(char *line_buffer);
-/*static char *ft_strchr(char *s, int c);*/
+static char	*ft_strchr(char *s, int c);
+static char	*ft_substr(char *sub, unsigned int start, size_t lenght);
 
 char	*get_next_line(int fd)
 {
@@ -22,7 +23,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*buffer;
 
-	buffer = (char *) malloc ((BUFFER_SIZE + 1) * sizeof(char)); //sizeof ?
+	buffer = (char *) malloc ((BUFFER_SIZE + 1) * sizeof(char));//sizeof ?
 	if (fd < 0 || BUFFER_SIZE <= 0 || read (fd, 0, 0) < 0)
 	{
 		free (left_ch);
@@ -68,6 +69,29 @@ static char	*fill_line_buffer(int fd, char *left_ch, char *buffer)
 	char	*temp;
 
 	b_read = 1;
+	while (b_read > 0)
+	{
+		b_read = read(fd, buffer, BUFFER_SIZE);
+		if (b_read == -1)
+		{
+			free (left_ch);
+			return (NULL);
+		}
+		else if (b_read == 0)
+			break ;
+		buffer [b_read] = 0;
+		if (!left_ch)
+			left_ch = ft_strdup ("");
+		temp = left_ch;
+		left_ch = ft_strjoin(temp, buffer);
+		free (temp);
+		temp = NULL;
+		if (ft_strchr(buffer, '\n'))
+			break ;
+	}
+	return (left_ch);
+}
+	/*
 	while (b_read > 0 && !ft_strchr(buffer, '\n'))
 	{
 		b_read = read(fd, buffer, BUFFER_SIZE);
@@ -88,26 +112,27 @@ static char	*fill_line_buffer(int fd, char *left_ch, char *buffer)
 	if (b_read == 0)
 		return (left_ch);
 	return (left_ch);
-}
-/*static char	*ft_strchr(char *s, int c)
+}  */
+
+static char	*ft_strchr(char *s, int c)
 {
 	unsigned int	i;
-	char 			ch;
-	
+	char			ch;
+
 	i = 0;
 	ch = (char) c;
 	while (s[i])
 	{
 		if (s[i] == ch)
-			return ((char*) &s[i]);
+			return ((char *) &s[i]);
 		i++;
 	}
-	if (s[i] == ch);
-		return ((char*) &s[i]);
+	if (s[i] == ch)
+		return ((char *) &s[i]);
 	return (NULL);
-}*/
+}
 
-const char	*ft_strchr(const char *s, int c)
+/*char	*ft_strchr(const char *s, int c)
 {
 	unsigned int	i;
 	char			ch;
@@ -122,10 +147,9 @@ const char	*ft_strchr(const char *s, int c)
 	}
 	if (s[i] == ch)
 		return (&s[i]);
-	return (NULL);
-}
-
-char	*ft_substr(char *sub, unsigned int start, size_t lenght)
+	return (NULL); 
+} */
+static char	*ft_substr(char *sub, unsigned int start, size_t lenght)
 {
 	size_t	i;
 	char	*str;
@@ -148,3 +172,39 @@ char	*ft_substr(char *sub, unsigned int start, size_t lenght)
 	str[i] = 0;
 	return (str);
 }
+/*
+ #include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include "get_next_line.h"  // Asegúrate de incluir el archivo de encabezado
+
+#define FILE_PATH "text_test.txt"  // Asegúrate de tener un archivo de prueba llamado test.txt
+
+int main()
+{
+    int fd;
+    char *line;
+
+    // Abre el archivo en modo lectura
+    fd = open(FILE_PATH, O_RDONLY);
+    if (fd == -1)
+    {
+        perror("Error opening file");
+        return (1);
+    }
+
+    // Lee el archivo línea por línea utilizando get_next_line
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        // Imprime la línea leída
+        printf("%s", line);
+        free(line);  // Libera la memoria de la línea leída
+    }
+
+    // Cierra el archivo
+    close(fd);
+
+    return (0);
+}
+*/

@@ -6,7 +6,7 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:15:53 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/02/23 14:03:47 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/02/23 19:17:32 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ char	*ft_strjoin(char *s1, char*s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	text1 = ft_strlen(s1); //se mide y se guarda en *s1
+	text1 = ft_strlen(s1);//se mide y se guarda en *s1
 	text2 = ft_strlen(s2);
-	result = (char *) malloc (text1 + text2 +1); // asignamos memo para result
+	result = (char *)malloc(text1 + text2 +1);// asignamos memo para result
 	if (!result)
 		return (NULL);
 	ft_strlcpy (result, s1, text1 + 1);

@@ -6,7 +6,7 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 16:20:37 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/02/23 13:44:46 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/02/23 20:13:36 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ char		*get_next_line(int fd);
 
 size_t		ft_strlen(const char *s);
 char		*ft_strdup(const char *s1);
-const char	*ft_strchr(const char *s, int c);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
 char		*ft_strjoin(char *s1, char*s2);
