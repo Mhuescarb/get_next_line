@@ -1,13 +1,13 @@
 #include "get_next_line.h"
 
- char	*_fill_line_buffer(int fd, char *left_ch, char *buffer)
+ char	*fill_line_buffer(int fd, char *left_ch, char *buffer)
 {
 	ssize_t	b_read;
 	char	*temp;
 
 	b_read = 1;
 	while (b_read > 0 && !ft_strchr(buffer, '\n'))
-	{
+	{ 
 		b_read = read(fd, buffer, BUFFER_SIZE);
 		if (b_read == -1)
 		{
