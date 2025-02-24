@@ -6,7 +6,7 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:03:17 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/02/23 20:31:18 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:57:19 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*buffer;
 
-	buffer = (char *) malloc ((BUFFER_SIZE + 1) * sizeof(char));//sizeof ?
+	buffer = (char *) malloc (BUFFER_SIZE + 1);/* * sizeof(char));//sizeof ?*/
 	if (fd < 0 || BUFFER_SIZE <= 0 || read (fd, 0, 0) < 0)
 	{
 		free (left_ch);
@@ -149,7 +149,7 @@ static char	*ft_strchr(char *s, int c)
 		return (&s[i]);
 	return (NULL); 
 } */
-static char	*ft_substr(char *sub, unsigned int start, size_t lenght)
+/*static char	*ft_substr(char *sub, unsigned int start, size_t lenght)
 {
 	size_t	i;
 	char	*str;
@@ -160,7 +160,7 @@ static char	*ft_substr(char *sub, unsigned int start, size_t lenght)
 		return (malloc (1));
 	if (lenght > ft_strlen (sub + start))
 		lenght = ft_strlen (sub + start);
-	str = malloc((lenght + 1) * sizeof (char));
+	str = malloc(lenght + 1); // * sizeof (char));
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -172,7 +172,40 @@ static char	*ft_substr(char *sub, unsigned int start, size_t lenght)
 	str[i] = 0;
 	return (str);
 }
-/*
+*/
+static char *ft_substr(char *sub, unsigned int start, size_t length)
+{
+    size_t i;
+    char *str;
+
+    if (!sub)
+        return (NULL);
+    
+    size_t sub_len = ft_strlen(sub); // Calcula la longitud de la cadena una vez
+
+    if (start >= sub_len) // Cambiado a >= para evitar accesos fuera de límites
+        return (ft_strdup("")); // Devuelve una cadena vacía
+
+    if (length > sub_len - start) // Ajusta la longitud si es mayor que lo que queda
+        length = sub_len - start;
+
+    str = malloc(length + 1); // +1 para el carácter nulo
+    if (!str)
+        return (NULL);
+    
+    i = 0; // Inicializa el índice
+    while (i < length) // Usa un bucle while en lugar de for
+    {
+        str[i] = sub[start + i]; // Copia la subcadena
+        i++;
+    }
+    str[i] = '\0'; // Asegúrate de terminar la cadena
+    return (str);
+}
+
+
+
+
  #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -181,7 +214,7 @@ static char	*ft_substr(char *sub, unsigned int start, size_t lenght)
 
 #define FILE_PATH "text_test.txt"  // Asegúrate de tener un archivo de prueba llamado test.txt
 
-int main()
+/* int main()
 {
     int fd;
     char *line;

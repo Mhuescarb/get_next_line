@@ -6,7 +6,7 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:15:53 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/02/23 19:17:32 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:02:26 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 	ft_strchr (para buscar '\n') // static en get_next_line
 	ft_strlcpy (necesaria para ft_strjoin)
 	ft_strlcat(necesaria para ft_strjoin)
-	ft_strjoin (para unir el contenido restante en buff a lo que está en left_ch)
+	ft_strjoin (para unir  contenido restante en buff a lo que está en left_ch)
 */
 
 size_t	ft_strlen(const char *s)
@@ -29,19 +29,18 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
-
 char	*ft_strdup(const char *s1)
 {
 	char	*dest;
 	int		i;
 
-	dest = (char *) malloc (ft_strlen(s1) + 1);
-	if (!dest || dest == NULL)
+	dest = (char *)malloc(ft_strlen(s1) + 1);
+	if (!dest)
 		return (NULL);
 	i = 0;
 	while (s1[i] != '\0')
 	{
-		dest[i] = s1 [i];
+		dest[i] = s1[i];
 		i++;
 	}
 	dest[i] = '\0';
@@ -93,10 +92,10 @@ char	*ft_strjoin(char *s1, char*s2)
 		return (NULL);
 	text1 = ft_strlen(s1);//se mide y se guarda en *s1
 	text2 = ft_strlen(s2);
-	result = (char *)malloc(text1 + text2 +1);// asignamos memo para result
+	result = (char *)malloc(text1 + text2 + 1);// asignamos memo para result
 	if (!result)
 		return (NULL);
 	ft_strlcpy (result, s1, text1 + 1);
-	ft_strlcat (result, s2, text1 + text2 +1);
+	ft_strlcat (result, s2, text1 + text2 + 1);
 	return (result);
 }
