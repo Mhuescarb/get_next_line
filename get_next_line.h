@@ -6,7 +6,7 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 16:20:37 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/02/23 20:13:36 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:51:07 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# include <unistd.h> //strchr
-# include <stdlib.h> // malloc
-# include <string.h> //strlen
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h> 
 
 char		*get_next_line(int fd);
 
