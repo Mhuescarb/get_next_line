@@ -6,7 +6,7 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:03:17 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/02/26 18:49:53 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/02/27 12:02:44 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ static char	*set_line(char *line_buffer);
 static char	*ft_strchr(char *s, int c);
 static char	*ft_substr(char *sub, unsigned int start, size_t lenght);
 
-char	*get_next_line(int fd)
+ char	*get_next_line(int fd)
 {
-	static char	*left_ch;
+	static char	*left_ch[4096];
 	char		*line;
 	char		*buffer;
 
 	buffer = (char *) malloc (BUFFER_SIZE + 1);
-	if (fd < 0 || BUFFER_SIZE <= 0 ) /*|| read (fd, &line, 0) < 0) */
+	if (fd < 0 || BUFFER_SIZE <= 0 ) //|| read (fd, &line, 0) < 0)
 	{
 		free (left_ch);
 		free (buffer);
-		left_ch = NULL;
+		left_ch[fd] = NULL;
 		buffer = NULL;
 		return (NULL);
 	}
@@ -39,10 +39,9 @@ char	*get_next_line(int fd)
 	buffer = NULL;
 	if (!line)
 		return (NULL);
-	left_ch = set_line(line);
+	left_ch[fd] = set_line(line);
 	return (line);
-}
-
+} 
 static char	*set_line(char *line_buffer)
 {
 	char	*left_ch;
@@ -53,7 +52,7 @@ static char	*set_line(char *line_buffer)
 		i++;
 	if (line_buffer[i] == 0 || line_buffer[1] == 0)
 		return (NULL);
-	left_ch = ft_substr(line_buffer, i + 1, ft_strlen(line_buffer) - i);
+	left_ch = ft_substr(line_buffer, i + 1, ft_strlen(line_buffer) - i - 1);
 	if (*left_ch == 0)
 	{
 		free (left_ch);
