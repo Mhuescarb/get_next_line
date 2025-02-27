@@ -6,7 +6,7 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:03:17 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/02/27 12:02:44 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:39:00 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,20 @@ static char	*set_line(char *line_buffer);
 static char	*ft_strchr(char *s, int c);
 static char	*ft_substr(char *sub, unsigned int start, size_t lenght);
 
- char	*get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	static char	*left_ch[4096];
+	static char	*left_ch;
 	char		*line;
 	char		*buffer;
 
-	buffer = (char *) malloc (BUFFER_SIZE + 1);
-	if (fd < 0 || BUFFER_SIZE <= 0 ) //|| read (fd, &line, 0) < 0)
+	
+	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		free (left_ch);
-		free (buffer);
-		left_ch[fd] = NULL;
-		buffer = NULL;
+		left_ch = NULL;
 		return (NULL);
 	}
+	buffer = (char *) malloc (BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
 	line = fill_line_buffer(fd, left_ch, buffer);
@@ -39,9 +38,10 @@ static char	*ft_substr(char *sub, unsigned int start, size_t lenght);
 	buffer = NULL;
 	if (!line)
 		return (NULL);
-	left_ch[fd] = set_line(line);
+	left_ch = set_line(line);
 	return (line);
-} 
+}
+
 static char	*set_line(char *line_buffer)
 {
 	char	*left_ch;
@@ -73,7 +73,7 @@ static char	*fill_line_buffer(int fd, char *left_ch, char *buffer)
 		b_read = read(fd, buffer, BUFFER_SIZE);
 		if (b_read == -1)
 		{
-			free (left_ch);
+			free (left_ch); //añadir free buffer?
 			return (NULL);
 		}
 		else if (b_read == 0)
@@ -135,3 +135,32 @@ static char	*ft_substr(char *sub, unsigned int start, size_t length)
 	str[i] = '\0';
 	return (str);
 }
+/*#include "get_next_line.h"
+
+#define FILE_PATH "text_test.txt"
+#include <stdio.h>
+#include <fcntl.h>
+
+ int main()
+{
+    int fd;
+    char *line;
+  
+    fd = open(FILE_PATH, O_RDONLY);
+    if (fd == -1)
+    {
+        perror("Error opening file");
+        return (1);
+    }
+
+    while ((line = get_next_line(fd)) != NULL)
+    {
+    
+        printf("%s", line);
+        free(line); 
+    }
+
+    close(fd);
+
+    return (0);
+}*/
