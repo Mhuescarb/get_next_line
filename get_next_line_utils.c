@@ -6,7 +6,7 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:15:53 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/02/27 15:49:15 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/02/28 09:46:38 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (s[i])
@@ -73,7 +73,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	if (d < size)
 		dst [s + d] = '\0';
 	return (d + ft_strlen (src));
-}
+} 
 
 char	*ft_strjoin(char *s1, char*s2)
 {

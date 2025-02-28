@@ -6,7 +6,7 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:03:17 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/02/27 18:39:00 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/02/28 10:19:06 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*set_line(char *line_buffer)
 	i = 0;
 	while (line_buffer[i] != '\n' && line_buffer[i] != '\0')
 		i++;
-	if (line_buffer[i] == 0 || line_buffer[1] == 0)
+	if (line_buffer[i] == '\0') //|| line_buffer[1] == 0)
 		return (NULL);
 	left_ch = ft_substr(line_buffer, i + 1, ft_strlen(line_buffer) - i - 1);
 	if (*left_ch == 0)
@@ -73,7 +73,7 @@ static char	*fill_line_buffer(int fd, char *left_ch, char *buffer)
 		b_read = read(fd, buffer, BUFFER_SIZE);
 		if (b_read == -1)
 		{
-			free (left_ch); //añadir free buffer?
+			free (left_ch);
 			return (NULL);
 		}
 		else if (b_read == 0)
