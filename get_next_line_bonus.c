@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 11:03:17 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/03/02 20:00:30 by mhuescar         ###   ########.fr       */
+/*   Created: 2025/03/02 19:06:18 by mhuescar          #+#    #+#             */
+/*   Updated: 2025/03/02 20:40:10 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*fill_line_buffer(int fd, char *left_ch, char *buffer);
 static char	*set_line(char *line_buffer);
@@ -113,53 +113,78 @@ static char	*set_line(char *line_buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*left_ch;
+	static char	*left_ch[4096];
 	char		*line;
 	char		*buffer;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
-		free (left_ch);
-		left_ch = NULL;
+		free (left_ch[fd]);
+		left_ch[fd] = NULL;
 		return (NULL);
 	}
 	buffer = (char *) malloc (BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	line = fill_line_buffer(fd, left_ch, buffer);
+	line = fill_line_buffer(fd, left_ch[fd], buffer);
 	free(buffer);
-	left_ch = NULL;
+	left_ch[fd] = NULL;
 	if (!line)
 		return (NULL);
-	left_ch = set_line(line);
+	left_ch[fd] = set_line(line);
 	return (line);
 }
-/* #include "get_next_line.h"
+/*
+#include "get_next_line_bonus.h"
 
-#define FILE_PATH "text.txt"
-#include <stdio.h>
-#include <fcntl.h>
-
- int main()
+int main(int argc, char **argv)
 {
-    int fd;
+    int fd1, fd2;
     char *line;
-  
-    fd = open("text.txt", O_RDONLY);
-    if (fd == -1)
+
+    // Verificar si el usuario pasó dos archivos como argumentos
+    if (argc != 3)
     {
-        perror("Error opening file");
-        return (1);
+        fprintf(stderr, "Usage: %s <file1_path> <file2_path>\n", argv[0]);
+        return 1;
     }
 
-    while ((line = get_next_line(fd)) != NULL)
+    // Abrir los dos archivos
+    fd1 = open(argv[1], O_RDONLY);
+    if (fd1 == -1)
     {
-    
-        printf("%s", line);
-        free(line); 
+        perror("Error opening file 1");
+        return 1;
     }
 
-    close(fd);
+    fd2 = open(argv[2], O_RDONLY);
+    if (fd2 == -1)
+    {
+        perror("Error opening file 2");
+        close(fd1);  // Cerrar fd1 antes de salir
+        return 1;
+    }
 
-    return (0);
-}*/
+    // Leer y mostrar cada línea del primer archivo
+    printf("Reading from file 1 (%s):\n", argv[1]);
+    while ((line = get_next_line(fd1)) != NULL)
+    {
+        printf("%s", line);  // Imprimir la línea leída
+        free(line);          // Liberar la memoria de la línea leída
+    }
+
+    // Leer y mostrar cada línea del segundo archivo
+    printf("\nReading from file 2 (%s):\n", argv[2]);
+    while ((line = get_next_line(fd2)) != NULL)
+    {
+        printf("%s", line);  // Imprimir la línea leída
+        free(line);          // Liberar la memoria de la línea leída
+    }
+
+    // Cerrar ambos archivos
+    close(fd1);
+    close(fd2);
+
+    return 0;
+}
+*/
