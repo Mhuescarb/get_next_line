@@ -6,7 +6,7 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:03:17 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/03/03 11:41:48 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:11:41 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,3 +134,4 @@ char	*get_next_line(int fd)
 	left_ch = set_line(line);
 	return (line);
 }
+

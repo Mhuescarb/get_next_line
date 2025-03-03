@@ -6,7 +6,7 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 19:06:18 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/03/03 12:33:51 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:27:53 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,3 +135,55 @@ char	*get_next_line(int fd)
 	left_ch[fd] = set_line(line);
 	return (line);
 }
+int main(int argc, char **argv)
+{
+    int fd1, fd2;
+    char *line;
+
+    if (argc != 3)
+    {
+        fprintf(stderr, "Usage: %s <file1_path> <file2_path>\n", argv[0]);
+        return 1;
+    }
+
+   
+    fd1 = open(argv[1], O_RDONLY);
+    if (fd1 == -1)
+    {
+        perror("Error opening file 1");
+        return 1;
+    }
+
+    fd2 = open(argv[2], O_RDONLY);
+    if (fd2 == -1)
+	
+    {
+        perror("Error opening file 2");
+        close(fd1); 
+        return 1;
+    }
+
+   
+    printf("Reading from file 1 (%s):\n", argv[1]);
+    while ((line = get_next_line(fd1)) != NULL)
+    {
+        printf("%s", line); 
+        free(line);         
+    }
+
+    
+    printf("\nReading from file 2 (%s):\n", argv[2]);
+    while ((line = get_next_line(fd2)) != NULL)
+    {
+        printf("%s", line); 
+        free(line);          
+    }
+
+
+    
+close(fd1);
+close(fd2);
+
+return 0;
+}
+

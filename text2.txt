@@ -1,0 +1,6 @@
+segundo
+texto
+de 
+prueba
+para
+get_next_line
