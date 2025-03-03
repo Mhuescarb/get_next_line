@@ -6,7 +6,7 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 19:01:33 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/03/02 20:27:47 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/03/03 13:22:08 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
+# define MAX_FD 4096
 
 # include <unistd.h>
 # include <stdlib.h>

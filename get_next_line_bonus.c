@@ -6,7 +6,7 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 19:06:18 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/03/02 20:40:10 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/03/03 12:33:51 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,9 @@ static char	*set_line(char *line_buffer)
 }
 
 char	*get_next_line(int fd)
+
 {
-	static char	*left_ch[4096];
+	static char	*left_ch[MAX_FD];
 	char		*line;
 	char		*buffer;
 
@@ -134,57 +135,3 @@ char	*get_next_line(int fd)
 	left_ch[fd] = set_line(line);
 	return (line);
 }
-/*
-#include "get_next_line_bonus.h"
-
-int main(int argc, char **argv)
-{
-    int fd1, fd2;
-    char *line;
-
-    // Verificar si el usuario pasó dos archivos como argumentos
-    if (argc != 3)
-    {
-        fprintf(stderr, "Usage: %s <file1_path> <file2_path>\n", argv[0]);
-        return 1;
-    }
-
-    // Abrir los dos archivos
-    fd1 = open(argv[1], O_RDONLY);
-    if (fd1 == -1)
-    {
-        perror("Error opening file 1");
-        return 1;
-    }
-
-    fd2 = open(argv[2], O_RDONLY);
-    if (fd2 == -1)
-    {
-        perror("Error opening file 2");
-        close(fd1);  // Cerrar fd1 antes de salir
-        return 1;
-    }
-
-    // Leer y mostrar cada línea del primer archivo
-    printf("Reading from file 1 (%s):\n", argv[1]);
-    while ((line = get_next_line(fd1)) != NULL)
-    {
-        printf("%s", line);  // Imprimir la línea leída
-        free(line);          // Liberar la memoria de la línea leída
-    }
-
-    // Leer y mostrar cada línea del segundo archivo
-    printf("\nReading from file 2 (%s):\n", argv[2]);
-    while ((line = get_next_line(fd2)) != NULL)
-    {
-        printf("%s", line);  // Imprimir la línea leída
-        free(line);          // Liberar la memoria de la línea leída
-    }
-
-    // Cerrar ambos archivos
-    close(fd1);
-    close(fd2);
-
-    return 0;
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:03:17 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/03/02 20:00:30 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/03/03 11:41:48 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,32 +134,3 @@ char	*get_next_line(int fd)
 	left_ch = set_line(line);
 	return (line);
 }
-/* #include "get_next_line.h"
-
-#define FILE_PATH "text.txt"
-#include <stdio.h>
-#include <fcntl.h>
-
- int main()
-{
-    int fd;
-    char *line;
-  
-    fd = open("text.txt", O_RDONLY);
-    if (fd == -1)
-    {
-        perror("Error opening file");
-        return (1);
-    }
-
-    while ((line = get_next_line(fd)) != NULL)
-    {
-    
-        printf("%s", line);
-        free(line); 
-    }
-
-    close(fd);
-
-    return (0);
-}*/
