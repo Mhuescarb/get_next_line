@@ -6,16 +6,16 @@
 /*   By: mhuescar <mhuescar@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 11:03:17 by mhuescar          #+#    #+#             */
-/*   Updated: 2025/03/03 15:11:41 by mhuescar         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:05:00 by mhuescar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*fill_line_buffer(int fd, char *left_ch, char *buffer);
-static char	*set_line(char *line_buffer);
 static char	*ft_strchr(char *s, int c);
 static char	*ft_substr(char *sub, unsigned int start, size_t lenght);
+static char	*fill_line_buffer(int fd, char *left_ch, char *buffer);
+static char	*set_line(char *line_buffer);
 
 static char	*ft_strchr(char *s, int c)
 {
@@ -134,4 +134,3 @@ char	*get_next_line(int fd)
 	left_ch = set_line(line);
 	return (line);
 }
-
